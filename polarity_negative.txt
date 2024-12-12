@@ -1,60 +1,120 @@
-sorun
-kayıp
-tehlike
-zorluk
-yalnızlık
 acı
-üzülme
-hata
-sıkıntı
-felaket
-depresyon
-korku
-çöküş
-hüsran
-ayrılık
-düşüş
-suç
-kargaşa
-hayal kırıklığı
-sıkıntı
-kötü
-yanlış
-zor
-karanlık
-yalnız
-sevimsiz
-depresif
-korkunç
-kötü huylu
-çaresiz
-mutsuz
-başarsız
-sinirli
-acı
-çirkin
-nahoş
-olumsuz
-hastalıklı
-neşesiz
-karamsar
+acımasızlık
+acizlik
+ağrı
+amma
+anlamsızlık
 ayrılmak
-kaybetmek
-üzülmek
-korkmak
-çöküş yaşamak
-engellenmek
-terk etmek
-incitmek
-zarar vermek
-hüsrana uğramak
-kırılmak
-bozulmak
+ayrılık
+baskı
 başarısız olmak
-hayal kırıklığına uğramak
-üzmek
-sinirlenmek
-terk etmek
+başarısızlık
+başarsız
+belirsizlik
+bıkkınlık
+boğulma
+bozulmak
+can sıkıntısı
+çaresiz
+çaresiz durum
+çaresizlik
+çatışma
+çıkmaz
+çıkmaz yol
+çirkin
+çöküş
+çöküş yaşamak
+değersizlik
 değil
-nefret
+depresif
+depresyon
+durgunluk
+düşmanlık
+düşüş
+endişe
+engel
+engellenmek
+felaket
+gerginlik
+gölge
+hata
+hayal kırıklığı
+hüsran
+hüsran dolu
+hüsrana uğramak
+hüzünlü
+hastalıklı
+huzursuzluk
+iğrenme
+ilgisiz
+ilgisizlik
 imkansız
+incinmek
+incitmek
+kaos
+karanlık
+karamsar
+karamsarlık
+kargaşa
+kaybetmek
+kayıp
+kayıp hissi
+kayıp yaşamak
+keder
+kederli
+kıskançlık
+korkmak
+korkunç
+korkutmak
+korku
+kötü
+kötü huylu
+moral bozukluğu
+mutsuz
+nahoş
+nefret
+neşesiz
+olumsuz
+pasiflik
+pişmanlık
+rahatsız
+rahatsızlık
+sefalet
+saldırganlık
+sıkıntı
+sıkıntılı
+sinir
+sinirlenmek
+sinirli
+soğukluk
+sorun
+şüphe
+tatminsizlik
+tatsız
+tatsızlık
+tedirgin
+tedirgin edici
+tedirginlik
+tehdit
+terk etmek
+umutsuzluk
+ümitsiz
+ürkek
+üzmek
+üzülmek
+üzüntü
+üzüntü dolu
+yalan
+yalnız
+yalnızlık
+yalnızlık hissi
+yanlış
+yetersizlik
+yorucu
+yorgunluk
+yıkım
+zehir
+zor
+zorbalık
+zorluk
+zor günler
