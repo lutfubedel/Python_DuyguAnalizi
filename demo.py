@@ -4,8 +4,11 @@ import zeyrek
 import string
 import pandas as pd
 from nltk.corpus import stopwords
+import openpyxl
+from openpyxl.styles import PatternFill
 
 # Gerekli NLTK paketlerini indirin
+#nltk.download("all")
 #nltk.download('punkt')
 #nltk.download('stopwords')
 
@@ -270,6 +273,24 @@ def evaluate_performance(results_df):
         'F1-Ölçütü': f1_olcutu
     }
 
+def highlight_cells_by_value(file_path):
+    workbook = openpyxl.load_workbook(file_path)
+    sheet = workbook.active 
+
+    red_fill = PatternFill(start_color="FF0000", end_color="FF0000", fill_type="solid")
+    green_fill = PatternFill(start_color="00FF00", end_color="00FF00", fill_type="solid")
+
+    for row in sheet.iter_rows():
+        for cell in row:
+            cell_value = str(cell.value).strip()
+            if cell_value == "False":
+                cell.fill = red_fill  
+            elif cell_value == "True":
+                cell.fill = green_fill  
+
+    workbook.save(file_path)
+
+
 def main(file_path):
     """
     Main fonksiyonu, dosyayı yükler, analizörleri başlatır, metni işler ve sonucu yazdırır.
@@ -337,7 +358,7 @@ def main(file_path):
             'Cümle': sentence,
             'FSM Tahmini': predicted_class,
             'Gerçek Sınıf': true_class,
-            'Result?': predicted_class == true_class
+            'Result?': predicted_class.lower() == true_class.lower()
         })
         print("-" * 30)
 
@@ -347,6 +368,7 @@ def main(file_path):
 
     # Sonuçları Excel dosyasına kaydet
     results_df.to_excel('tahmin_sonuclari.xlsx', index=False, engine='openpyxl')
+    highlight_cells_by_value('tahmin_sonuclari.xlsx')
     print("Sonuçlar 'tahmin_sonuclari.xlsx' dosyasına kaydedildi.")
 
     # Performans değerlendirme
