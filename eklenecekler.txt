@@ -1,0 +1,5 @@
+- Double Negation çalışmıyor
+- Cümle iyi dilekle başlıyorsa pozitif olması gerekiyor
+- ard arda gelen iki negatif kelime pozitif anlam oluşturur.
+- (!) olunca olumsuz oluyor
+- Kelime listeleri güncellenmeli

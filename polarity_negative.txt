@@ -32,6 +32,7 @@ durgunluk
 düşmanlık
 düşüş
 endişe
+ekşi
 engel
 engellenmek
 felaket
@@ -40,6 +41,7 @@ gölge
 hata
 hayal kırıklığı
 hüsran
+hayır
 hüsran dolu
 hüsrana uğramak
 hüzünlü
@@ -80,6 +82,7 @@ pişmanlık
 rahatsız
 rahatsızlık
 sefalet
+saçma
 saldırganlık
 sıkıntı
 sıkıntılı
@@ -109,6 +112,7 @@ yalnız
 yalnızlık
 yalnızlık hissi
 yanlış
+yok
 yetersizlik
 yorucu
 yorgunluk

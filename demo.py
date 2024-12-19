@@ -72,19 +72,20 @@ def negation_suffix_control(processed_text):
     for sentence in processed_text:
         for word_info in sentence:
             ekler = word_info["Ekler"].split("+")
-            if "Neg" in ekler or "Unable" in ekler or "Without" in ekler:
-                print(f"Olumsuzluk eki bulundu: {word_info['Kelime']}")
-                return True   
+            if word_info["Kök"] != "değil":
+                if "Neg" in ekler or "Unable" in ekler or "Without" in ekler:
+                    print(f"Olumsuzluk eki bulundu: {word_info['Kelime']}")
+                    return True   
     return False
 
 def double_negation_control(processed_text):
     # Eğer ilk olumsuzluk ekini bulmuşsak, "değil" kelimesini kontrol et
-    if negation_suffix_control(processed_text):
-        for sentence in processed_text:
+    for sentence in processed_text:
             for word_info in sentence:
                 if word_info["Kök"] == "değil":
                     print("Değil kelimesi bulundu")
                     return True
+        
     return False
 
 def positive_polarity_control(processed_text, polarity_file):
@@ -211,7 +212,7 @@ def run_fsm(fsm, input_data):
     while current_state not in ["Pozitif", "Negatif"]:
         # Mevcut durumdaki geçişleri al
         transitions = fsm.get(current_state, {})
-        
+        print(current_state)
         # Geçiş koşullarını kontrol et ve uygun bir sonraki duruma ilerle
         transition_found = False
         for condition, next_state in transitions.items():
