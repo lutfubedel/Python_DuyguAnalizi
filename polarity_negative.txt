@@ -44,6 +44,7 @@ boz
 bozul
 bozulmak
 can sıkıntısı
+cimri
 çağ dışı
 çatışma
 çarpık
@@ -171,6 +172,7 @@ nefret
 neşesiz
 onarılmaz
 olumsuz
+ölü
 pasiflik
 pişkin
 problem
@@ -235,6 +237,7 @@ uzaklaşma
 vefat
 virüs
 vazgeç
+yalan
 yalancı
 yalnız
 yalnızlık
