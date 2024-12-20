@@ -5,6 +5,7 @@ acı
 acımasız
 acımasızlık
 acizlik
+âciz
 açgözlü
 ahlaksız
 aksilik
@@ -45,6 +46,7 @@ bozul
 bozulmak
 can sıkıntısı
 çağ dışı
+cimri
 çatışma
 çarpık
 ceza
@@ -63,7 +65,6 @@ dedikoducu
 deli
 dengesiz
 değersizlik
-değil
 dert
 depresif
 depresyon
@@ -82,6 +83,7 @@ eksiklik
 elverişsiz
 endişe
 endişe verici
+ekşi
 endişeli
 engel
 engellenmek
@@ -102,6 +104,7 @@ hatırlanmak
 hayal kırıklığı
 hata
 hırçın
+hiç
 hüngür
 hüsran
 hüsran dolu
@@ -145,6 +148,7 @@ kokain
 kolaysa
 konuş
 köle
+kötü
 köleleş
 kork
 korkak
@@ -181,6 +185,7 @@ rezalet
 sabırsız
 salgın
 saldırganlık
+saldırmak
 samimiyetsiz
 saçma
 sefalet
@@ -193,6 +198,7 @@ sıkıntı
 sıkıntılı
 sinir
 sinirlenmek
+sinirlen
 sinirli
 soğuk
 soğukluk
@@ -236,6 +242,7 @@ vefat
 virüs
 vazgeç
 yalancı
+yalan
 yalnız
 yalnızlık
 yanlış

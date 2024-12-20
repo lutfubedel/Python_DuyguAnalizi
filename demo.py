@@ -93,16 +93,46 @@ def positive_polarity_control(processed_text, polarity_file):
         text_words = set(file.read().strip().lower().splitlines()) 
 
     for sentence in processed_text:
-        for word_info in sentence:
+        for i, word_info in enumerate(sentence):
             word = word_info["Kök"].lower()
             if word in text_words:
                 ekler = word_info["Ekler"].split("+")
-                if "Neg" or "Unable" in ekler or "Without" in ekler:
-                    print(f"Olumsuz Kelime : {word_info['Kelime']}")
+                if "Neg" in ekler or "Unable" in ekler or "Without" in ekler:
+                    print(f"Pozitif Kelime ama Olumsuzluk eki : {word_info['Kelime']}")
                     return False
+                if i + 1 < len(sentence):
+                    next_word_info = sentence[i + 1]
+                    next_word = next_word_info["Kök"].lower()
+                    if next_word == "değil":
+                        print(f"Pozitif Kelime ama değil ile : {word_info['Kelime']}")
+                        return False
+                
+                
                 print(word)
                 return True 
     return False
+
+
+def positive_degil_control(processed_text, polarity_file):
+    with open(polarity_file, "r", encoding="utf-8") as file:
+        text_words = set(file.read().strip().lower().splitlines()) 
+    
+    for sentence in processed_text:
+        for i, word_info in enumerate(sentence):
+            word = word_info["Kök"].lower()
+            if word in text_words:
+                ekler = word_info["Ekler"].split("+")     
+                # Check the next word if it exists
+                if i + 1 < len(sentence):
+                    next_word_info = sentence[i + 1]
+                    next_word = next_word_info["Kök"].lower()
+                    if next_word == "değil":
+                        print(f"Pozitif Kelime ama değil ile : {word_info['Kelime']}")
+                        return True
+                
+                print("Positif Degil : ", word)
+    return False
+
 
 def negative_polarity_control(processed_text, polarity_file):
     with open(polarity_file, "r", encoding="utf-8") as file:
@@ -128,8 +158,8 @@ def positive_score_calculate(processed_text, polarity_file):
                 word = word_info["Kök"].lower()
                 if word in text_words:
                     ekler = word_info["Ekler"].split("+")
-                    if "Neg" in ekler:
-                        print(f"Olumsuzluk eki bulundu: {word_info['Kelime']}")
+                    if word in text_words or "Neg" in ekler or "Unable" in ekler or "Without" in ekler:
+                        print(f"Pozitif Kelime : {word_info['Kelime']}")
                     else:
                         score +=1
 
@@ -173,11 +203,13 @@ def analyze_sentence(processed_text):
         "negative_words": False,
         "positive_score_gte_negative": False,
         "negative_score_gt_positive": False,
+        "positive_degil" : False,
 
         "no_negation_suffix": True,
         "no_double_negation": True,
         "no_positive_words": True,
         "no_negative_words":True,
+        "no_positive_degil":True
     }
 
     input_data["negation_suffix"] = negation_suffix_control(processed_text)
@@ -185,7 +217,9 @@ def analyze_sentence(processed_text):
 
     positive_polarity = positive_polarity_control(processed_text, "polarity_positive.txt")
     negative_polarity = negative_polarity_control(processed_text, "polarity_negative.txt")
+    positive_degil = positive_degil_control(processed_text, "polarity_positive.txt")
 
+    input_data["positive_degil"] = positive_degil
     input_data["positive_words"] = positive_polarity
     input_data["negative_words"] = negative_polarity
 
@@ -208,23 +242,30 @@ def run_fsm(fsm, input_data):
     FSM'i çalıştırır ve bir son duruma ("positive" veya "negative") ulaşana kadar devam eder.
     """
     current_state = "start"
+    print(f"Başlangıç Durumu: {current_state}")
 
     while current_state not in ["Pozitif", "Negatif"]:
+        print(f"Mevcut Durum: {current_state}")
+
         # Mevcut durumdaki geçişleri al
         transitions = fsm.get(current_state, {})
-        print(current_state)
-        # Geçiş koşullarını kontrol et ve uygun bir sonraki duruma ilerle
         transition_found = False
+
+        # Geçiş koşullarını kontrol et ve uygun bir sonraki duruma ilerle
         for condition, next_state in transitions.items():
             if condition in input_data and input_data[condition]:
+                print(f"Koşul Sağlandı: {condition} -> Geçiş Yapılıyor: {next_state}")
                 current_state = next_state
                 transition_found = True
                 break
         
         if not transition_found:
+            print(f"Durum '{current_state}' için geçerli bir geçiş bulunamadı.")
             raise ValueError(f"Durum '{current_state}' için geçerli bir geçiş bulunamadı.")
     
+    print(f"Son Durum: {current_state}")
     return current_state
+
 
 def evaluate_performance(results_df):
     """
@@ -335,7 +376,11 @@ def main(file_path):
             },
             "check_negative_context": {
                 "negative_words": "Negatif",
-                "no_negative_words": "resolve_tie",
+                "no_negative_words": "positive_degil_control",
+            },
+            "positive_degil_control": {
+                "positive_degil": "Negatif",
+                "no_positive_degil": "resolve_tie",
             },
             "resolve_tie": {
                 "positive_score_gte_negative": "Pozitif",
