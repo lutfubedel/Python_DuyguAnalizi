@@ -51,6 +51,7 @@ cimri
 çatışma
 çarpık
 ceza
+cezalandırmak
 çelişki
 çelişkili
 çıkmaz
@@ -58,14 +59,17 @@ ceza
 çirkin
 çirkinlik
 çöküntü
+çökmek
 çöküş
 çöküş yaşamak
 dargın
 dedikodu
+dadanmak
 dedikoducu
 deli
 dengesiz
 değersizlik
+değil
 dert
 depresif
 depresyon
@@ -85,6 +89,7 @@ elverişsiz
 endişe
 endişe verici
 ekşi
+eyvah
 endişeli
 engel
 engellenmek
@@ -104,6 +109,7 @@ hastalık
 hatırlanmak
 hayal kırıklığı
 hata
+hayır
 hırçın
 hiç
 hüngür
@@ -126,6 +132,7 @@ istifa
 istismar
 istismarcı
 işkence
+intihar
 itici
 kabus
 karamsar
@@ -142,7 +149,9 @@ kayıp yaşamak
 karmaşık
 kes
 kesil
+kesmek
 kıskan
+kırmak
 kıskanç
 kıskançlık
 kokain
@@ -150,6 +159,7 @@ kolaysa
 konuş
 köle
 kötü
+kötülük
 köleleş
 kork
 korkak
@@ -177,6 +187,10 @@ neşesiz
 onarılmaz
 olumsuz
 ölü
+ölüm
+öldürmek
+özlemek
+özle
 pasiflik
 pişkin
 problem
@@ -188,6 +202,7 @@ sabırsız
 salgın
 saldırganlık
 saldırmak
+sanki
 samimiyetsiz
 saçma
 sefalet
@@ -208,6 +223,7 @@ soğut
 sorun
 suratsız
 süründür
+sürünmek
 şiddet
 tahammülsüz
 tatminsizlik
@@ -229,6 +245,7 @@ tüken
 tükenmişlik
 unut
 unutkan
+unutmak
 utanç
 uygunsuz
 üşü
@@ -248,6 +265,7 @@ yalancı
 yalan
 yalnız
 yalnızlık
+yalamak
 yanlış
 yara
 yaralı
@@ -255,6 +273,8 @@ yaramaz
 yararsız
 yetersiz
 yetersizlik
+yırtmak
+yıkmak
 yorucu
 yorul
 yorgunluk
