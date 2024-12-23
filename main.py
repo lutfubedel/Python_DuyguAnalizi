@@ -8,54 +8,41 @@ import openpyxl
 from openpyxl.styles import PatternFill
 import rules
 
+
 # Gerekli NLTK paketlerini indirin
 #nltk.download("all")
 #nltk.download('punkt')
 #nltk.download('stopwords')
 
 
-def load_excel_file(file_path):
-    """
-    Excel dosyasını yükleyip, 'Cümle' sütununu döndüren fonksiyon.
-    """
-    df = pd.read_excel(file_path, engine='openpyxl')
-    return df['Cümle'].tolist()  # 'Cümle' sütununu listeye dönüştür
-
-def initialize_analyzers():
-    """
-    Zeyrek ve Stanza analizörlerini başlatan fonksiyon.
-    """
-    analyzer = zeyrek.MorphAnalyzer()
-    return analyzer
-
-def remove_punctuation(text):
-    """
-    Noktalama işaretlerini kaldıran fonksiyon.
-    """
-    words = word_tokenize(text)
-    words = [word for word in words if word not in string.punctuation]
-    return ' '.join(words)
-
 def process_text_with_zeyrek(text, analyzer):
     """
     Zeyrek analizörü ile metni işleyen fonksiyon. Kelime, kök, ekler ve pos değerlerini döndürür.
+    Eğer cümlede 'ama' veya 'fakat' gibi bağlaçlar varsa, o kelimelerden önceki kelimeleri kaldırır.
     """
     sentences = sent_tokenize(text)  # Metni cümlelere ayır
     processed_sentences = []
 
     # Türkçe StopWords listesini al
-    turkish_stopwords = set(stopwords.words('turkish'))
+    #turkish_stopwords = set(stopwords.words('turkish'))
+    
+    # Bağlaçlar listesi (ama, fakat gibi)
+    conjunctions = {'ama', 'fakat','oysa',"hâlbuki","rağmen"}
 
     for sentence in sentences:
         words = word_tokenize(sentence)  # Kelimelere ayır
+
+        # Cümledeki bağlaçlardan önceki kelimeleri kaldır
+        for conjunction in conjunctions:
+            if conjunction in words:
+                index = words.index(conjunction)
+                words = words[index:]  # Bağlaçtan önceki kelimeleri çıkar
 
         # Zeyrek ile kelimeleri köklere, eklerine ve POS değerine ayır
         sentence_info = []
         for word in words:
             word_lower = word.lower()  # Büyük-küçük harf duyarlılığını kaldır
-            if word_lower in turkish_stopwords:  # Stopwords listesinde olan kelimeleri atla
-                continue
-            analysis = analyzer.analyze(word)
+            analysis = analyzer.analyze(word_lower)
             if analysis:
                 root = analysis[0][0].lemma  # Kelimenin kökü
                 suffixes = "+".join(analysis[0][0].morphemes[1:])  # Kelimenin ekleri
@@ -78,6 +65,7 @@ def process_text_with_zeyrek(text, analyzer):
 
     return processed_sentences
 
+
 def display_processed_text(processed_text):
     """
     İşlenmiş metni formatlı şekilde yazdıran fonksiyon.
@@ -93,8 +81,6 @@ def display_processed_text(processed_text):
 def analyze_sentence(processed_text):
     # Flagleri başlat
     input_data = {
-        "negation_suffix": False,
-        "double_negation": False,
         "positive_words": False,
         "negative_words": False,
         "positive_score_gte_negative": False,
@@ -104,9 +90,12 @@ def analyze_sentence(processed_text):
         "ironic_punctuation": False,
         "negative_beforeComma" : False,
         "positive_beforeComma" : False,
+        "ne_ne" : False,
+        "end_with_degil" : False,
+        "conjunctions_word": False,
+        "hic_before_pos": False,
+        "hic_before_neg": False,
 
-        "no_negation_suffix": True,
-        "no_double_negation": True,
         "no_positive_words": True,
         "no_negative_words":True,
         "no_positive_degil":True,
@@ -114,33 +103,50 @@ def analyze_sentence(processed_text):
         "no_ironic_punctuation":True,
         "no_negative_beforeComma" : True,
         "no_positive_beforeComma" : True,
+        "no_ne_ne" : True,
+        "no_end_with_degil": True,
+        "no_conjunctions_word": True,
+        "no_hic_before_pos" : True,
+        "no_hic_before_neg" : True,
     }
-
-    input_data["negation_suffix"] = rules.negation_suffix_control(processed_text)
-    input_data["double_negation"] = rules.double_negation_control(processed_text,"polarity_negative.txt")
     
     input_data["positive_degil"] = rules.positive_degil_control(processed_text, "polarity_positive.txt")
     input_data["negative_degil"] = rules.negative_degil_control(processed_text, "polarity_negative.txt")
-
-    input_data["positive_words"] = rules.positive_polarity_control(processed_text, "polarity_positive.txt")
-    input_data["negative_words"] = rules.negative_polarity_control(processed_text, "polarity_negative.txt")
 
     input_data["negative_beforeComma"] = rules.check_before_comma(processed_text,"polarity_negative.txt")
     input_data["positive_beforeComma"] = rules.check_before_comma(processed_text,"polarity_positive.txt")
 
     input_data["ironic_punctuation"] = rules.ironic_punctuation(processed_text)
+    input_data["ne_ne"] = rules.ne_ne_control(processed_text)
 
-    positive_score = rules.positive_score_calculate(processed_text, "polarity_positive.txt")
-    negative_score = rules.negative_score_calculate(processed_text, "polarity_negative.txt")
+    positive_score, neg_words = rules.positive_score_calculate(processed_text, "polarity_positive.txt")
+    negative_score, pos_wordas = rules.negative_score_calculate(processed_text, "polarity_negative.txt")
 
-    print("Positive Polarity : " , rules.positive_polarity_control(processed_text, "polarity_positive.txt") , "\t Score : ", positive_score)
-    print("Negative Polarity : " , rules.negative_polarity_control(processed_text, "polarity_negative.txt") , "\t Score : ", negative_score)
+    input_data["end_with_degil"] = rules.end_with_degil(processed_text)
 
-    if(positive_score >= negative_score):
+    input_data["hic_before_pos"] = rules.check_before_hic(processed_text,"polarity_positive.txt")
+    input_data["hic_before_neg"] = rules.check_before_hic(processed_text,"polarity_negative.txt")
+
+
+    print("Positive Polarity : " , "Score : ", positive_score)
+    print("Negative Polarity : " , "Score : ", negative_score)
+
+    if(negative_score == 0 and positive_score == 0):
+        input_data["conjunctions_word"] = rules.conjunctions_control(processed_text)
+
+    if(positive_score > negative_score):
         input_data["positive_score_gte_negative"] = True
     
-    if(negative_score > positive_score):
+    elif(negative_score > positive_score):
         input_data["negative_score_gt_positive"] = True
+
+    else:
+        if(rules.equal_score(processed_text,"polarity_negative.txt","polarity_positive.txt")):
+            input_data["positive_score_gte_negative"] = True
+        else:
+            input_data["negative_score_gt_positive"] = True
+
+        
 
     return input_data
 
@@ -244,11 +250,13 @@ def main(file_path):
     """
     # Excel dosyasını yükle
     df = pd.read_excel(file_path, engine='openpyxl')
+    #df = df.iloc[780:795]
+
     sentences = df['Cümle'].tolist()  # Cümle sütununu listeye al
     true_classes = df['Sınıf'].tolist()  # Sınıf sütununu listeye al
 
     # Analizörleri başlat
-    analyzer = initialize_analyzers()
+    analyzer = zeyrek.MorphAnalyzer()
 
     # Sonuçları saklamak için bir liste
     results = []
@@ -270,7 +278,12 @@ def main(file_path):
             "start": 
             {
                 "ironic_punctuation": "Negatif",
-                "no_ironic_punctuation": "positive_degil_control",
+                "no_ironic_punctuation": "ne_ne_control",
+            },
+            "ne_ne_control": 
+            {
+                "ne_ne": "Negatif",
+                "no_ne_ne": "positive_degil_control",
             },
             "positive_degil_control": 
             {
@@ -280,12 +293,7 @@ def main(file_path):
             "negative_degil_control": 
             {
                 "negative_degil": "Pozitif",
-                "no_positive_degil": "double_negation_control",
-            },
-            "double_negation_control": 
-            {
-                "double_negation": "Pozitif",
-                "no_double_negation": "check_negative_beforeComma",
+                "no_positive_degil": "check_negative_beforeComma",
             },
             "check_negative_beforeComma": 
             {
@@ -295,17 +303,27 @@ def main(file_path):
             "check_positive_beforeComma": 
             {
                 "positive_beforeComma": "Pozitif",
-                "no_positive_beforeComma": "check_negative_context",
+                "no_positive_beforeComma": "check_end_with_degil",
             },
-            "check_positive_context": 
+            "check_end_with_degil":
             {
-                "positive_words": "Pozitif",
-                "no_positive_words": "check_negative_context",
+                "end_with_degil" : "Negatif",
+                "no_end_with_degil" : "check_conjunctions_word",
             },
-            "check_negative_context": 
+            "check_conjunctions_word": 
             {
-                "negative_words": "Negatif",
-                "no_negative_words": "resolve_tie",
+                "conjunctions_word": "Negatif",
+                "no_conjunctions_word": "check_hic_before_pos",
+            },
+            "check_hic_before_pos": 
+            {
+                "hic_before_pos": "Negatif",
+                "no_hic_before_pos": "check_hic_before_neg",
+            },
+            "check_hic_before_neg": 
+            {
+                "hic_before_neg": "Pozitif",
+                "no_hic_before_neg": "resolve_tie",
             },
             "resolve_tie": 
             {
@@ -350,12 +368,9 @@ def main(file_path):
 
 
     # Performans değerlendirme
-    performance_metrics = evaluate_performance(results_df)
+    evaluate_performance(results_df)
 
-    # Performans metriklerini yazdır
-    print("\nPerformans Değerleri:")
-    for metric, value in performance_metrics.items():
-        print(f"{metric}: {value:.2f}")
+
 
 
 # Ana fonksiyonu çağır

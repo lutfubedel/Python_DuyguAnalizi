@@ -176,6 +176,7 @@ pratik
 prestijli
 rahat
 rahatlatmak
+rahatlamak
 refah
 sadakat
 sadelik
@@ -209,7 +210,6 @@ sevmek
 şirin
 şükran dolu
 şükür
-sıcak
 tatlı
 tatlılık
 tatmin

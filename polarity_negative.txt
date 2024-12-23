@@ -83,6 +83,7 @@ düşman
 düşmanlık
 düşmek
 düşüş
+ezmek
 eksik
 eksiklik
 elverişsiz
@@ -111,7 +112,7 @@ hayal kırıklığı
 hata
 hayır
 hırçın
-hiç
+hiçbir
 hüngür
 hüsran
 hüsran dolu
