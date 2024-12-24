@@ -46,6 +46,7 @@ bozul
 bozulmak
 can sıkıntısı
 cimri
+canavar
 çağ dışı
 cimri
 çatışma

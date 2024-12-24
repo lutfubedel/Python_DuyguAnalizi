@@ -65,7 +65,6 @@ def process_text_with_zeyrek(text, analyzer):
 
     return processed_sentences
 
-
 def display_processed_text(processed_text):
     """
     İşlenmiş metni formatlı şekilde yazdıran fonksiyon.
@@ -77,12 +76,9 @@ def display_processed_text(processed_text):
             print(f"Kelime: {word_info['Kelime']}, \nKök: {word_info['Kök']}, \nEkler: {word_info['Ekler']}, \nPOS: {word_info['POS']}\n--------------------------------------")
         print("----------------------------------------------------------------------------------------------------------")
 
-
 def analyze_sentence(processed_text):
     # Flagleri başlat
     input_data = {
-        "positive_words": False,
-        "negative_words": False,
         "positive_score_gte_negative": False,
         "negative_score_gt_positive": False,
         "positive_degil" : False,
@@ -96,8 +92,6 @@ def analyze_sentence(processed_text):
         "hic_before_pos": False,
         "hic_before_neg": False,
 
-        "no_positive_words": True,
-        "no_negative_words":True,
         "no_positive_degil":True,
         "no_negative_degil":True,
         "no_ironic_punctuation":True,
@@ -127,7 +121,6 @@ def analyze_sentence(processed_text):
     input_data["hic_before_pos"] = rules.check_before_hic(processed_text,"polarity_positive.txt")
     input_data["hic_before_neg"] = rules.check_before_hic(processed_text,"polarity_negative.txt")
 
-
     print("Positive Polarity : " , "Score : ", positive_score)
     print("Negative Polarity : " , "Score : ", negative_score)
 
@@ -145,8 +138,6 @@ def analyze_sentence(processed_text):
             input_data["positive_score_gte_negative"] = True
         else:
             input_data["negative_score_gt_positive"] = True
-
-        
 
     return input_data
 
@@ -210,6 +201,7 @@ def evaluate_performance(results_df):
     f1_olcutu = (2 * kesinlik * anma) / (kesinlik + anma) if (kesinlik + anma) > 0 else 0
 
     # Sonuçları yazdır
+    print("-"*20)
     print("Performans Değerleri:")
     print(f"Doğru Pozitif (DP): {DP}")
     print(f"Yanlış Pozitif (YP): {YP}")

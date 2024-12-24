@@ -103,9 +103,6 @@ def ironic_punctuation(processed_text):
     # Son üç kelimenin kökleri sırasıyla "(", "!" ve ")" ise, ironik noktalama işareti bulunduğunu bildirir
     if len(processed_text) > 0:
         last_sentence = processed_text[-1]
-        if last_sentence[-1]["Kök"] == "!" or last_sentence[-1]["Kök"] == "?" :
-            print("İronik Noktalama İşareti Bulundu")
-            return True
         if len(last_sentence) >= 3:  
             if last_sentence[-3]["Kök"] == "(" and last_sentence[-2]["Kök"] == "!" and last_sentence[-1]["Kök"] == ")":
                 print("İronik Noktalama İşareti Bulundu")
@@ -196,31 +193,20 @@ def ayirt_et(kelime):
     """
     Türkçedeki -ma/-me ekini 'isim-fiil' mi yoksa 'olumsuzluk' mu diye ayırt etmeye çalışan geliştirilmiş fonksiyon.
     """
-
-    # İsim-fiil ekini yakalamak için daha spesifik bir desen:
-    # - "ma", "me", "mi", "mı" sonrasında
-    # - araya bir 'y' girip hemen ardından bir "ı,i,u,ü,a,e" geliyorsa (ör. -mayı, -meye, -meyi, -maya...)
-    # - Bu örnek, sadece isim-fiil eklerini tanıyacak şekilde çalışır.
     isim_fiil_musteresi = re.compile(
         r'^(.*?)(ma|me|mı|mi)([yğ][ıiüuae])(?!n).*',  # "ma", "me" + "y[ıiüuae]" ama "yın" hariç
         re.IGNORECASE
     )
 
-    # Olumsuzluk ekini yakalamak için, kelimede "ma/me" geçip 
-    # isim-fiildeki gibi spesifik bir "y[ıiüuae]" grubuna uymuyorsa "olumsuzluk" varsayalım.
     olumsuzluk_musteresi = re.compile(
-        r'^(.*?)(ma|me|mı|mi).*',
+        r'^(.*?)(ma|me|mı|mi)(?![yğ][ıiüuae]).*',  # Burada "y[ıiüuae]" ekini engelliyoruz
         re.IGNORECASE
     )
-    
-    # 1) İSİM-FİİL Mİ?
+
     if isim_fiil_musteresi.match(kelime):
         return False
 
-    # 2) OLUMSUZLUK MÜ?
     elif olumsuzluk_musteresi.match(kelime):
-        # Olumsuzluk olan kelimeler (örneğin "sevmemek") 
-        # olumsuzluk ekinin "ma" veya "me" olduğunu belirleriz.
         return True
 
     # 3) HİÇBİRİ UYMADIYSA
@@ -240,9 +226,8 @@ def check_before_hic(processed_text, polarity_file):
                 if i - 1 >= 0:
                     previous_word_info = sentence[i - 1]
                     previous_word = previous_word_info["Kök"].lower()
-                    if previous_word == "hiç":
+                    if previous_word == "hiç" or previous_word == "amma":
                         print(f"Pozitif kelimenin öncesinde 'hiç' bulundu: {word_info['Kelime']}")
                         return True
 
     return False
-
