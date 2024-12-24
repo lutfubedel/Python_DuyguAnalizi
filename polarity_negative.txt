@@ -4,7 +4,7 @@ abartılmış
 abartı
 acı
 acizlik
-âciz
+aciz 
 açgözlü
 aksilik
 aksi
@@ -47,13 +47,11 @@ cezalandırmak
 çelişki
 çelişkili
 çıkmaz
-çıkmaz yol
 çirkin
 çirkinlik
 çöküntü
 çökmek
 çöküş
-çöküş yaşamak
 dargın
 dedikodu
 dadanmak
