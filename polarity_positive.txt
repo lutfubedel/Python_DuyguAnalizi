@@ -1,4 +1,3 @@
-düğün
 evet
 adalet
 adil
@@ -89,6 +88,7 @@ doy
 doymak
 doyurucu
 duyarlı
+düğün
 dürüst
 düzen
 düzenli
