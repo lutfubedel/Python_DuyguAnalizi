@@ -1,4 +1,3 @@
-düğün
 evet
 adalet
 adil
@@ -36,7 +35,6 @@ bağışlayıcı
 bağlılık
 baş tacı
 başarı
-başarı dolu
 başarmak
 başarılı
 başarı
@@ -90,6 +88,7 @@ doy
 doymak
 doyurucu
 duyarlı
+düğün
 dürüst
 düzen
 düzenli
@@ -123,7 +122,6 @@ gelişim
 geliş
 gelişmiş
 girişimci
-göz kamaştırıcı
 güçlü
 güleryüz
 gül 
@@ -147,7 +145,6 @@ heves
 hevesli
 heyecan
 heyecanlı
-heyecan verici
 heyecanlan
 heyecanlanmak
 hoş
@@ -158,7 +155,6 @@ hürmet
 hayran
 hayırsever
 huzur
-huzur dolu
 huzurlu
 idealist
 ideal
@@ -167,7 +163,6 @@ ilham
 ılımlı
 inanmak
 inanç
-ince düşünce
 inovatif
 içten
 işbirliği
@@ -188,7 +183,6 @@ kapsayıcı
 katılımcı
 kazan
 kazanmak
-kendinden emin
 keyif
 keşfetmek
 kibar
@@ -233,24 +227,19 @@ netlik
 objektiflik
 odaklanmış
 olumlu
-olmazsa olmaz
 onaylanmış
 onur
 onurlu
-örnek alınan
 övgü
 özenli
 özgün
 özverili
 özgürlük
 parlak
-parlak fikirli
 parlaklık
 parıltılı
 paylaşmak
-paha biçilemez
 pozitif
-pozitif etki
 pratik
 prestijli
 rahat
@@ -267,7 +256,6 @@ saygın
 saygılı
 sebatkar
 sevda
-sevda dolu
 sevgi
 sevgili
 sevilen
@@ -284,10 +272,10 @@ sevmek
 şanslı
 şen
 şevk
-şevkat dolu
+şevkat
 şık
 şirin
-şükran dolu
+şükran
 şükür
 sıcak
 takdir
@@ -305,8 +293,6 @@ uyanış
 uyumlu
 uyumluluk
 umut
-umut dolu
-umut ışığı
 umutlandırıcı
 ulaşılabilir
 verimli
