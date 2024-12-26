@@ -285,7 +285,7 @@ def main(file_path):
             "negative_degil_control": 
             {
                 "negative_degil": "Pozitif",
-                "no_positive_degil": "check_negative_beforeComma",
+                "no_negative_degil": "check_negative_beforeComma",
             },
             "check_negative_beforeComma": 
             {
