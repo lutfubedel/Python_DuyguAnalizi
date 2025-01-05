@@ -92,16 +92,7 @@ def analyze_sentence(processed_text):
         "hic_before_pos": False,
         "hic_before_neg": False,
 
-        "no_positive_degil":True,
-        "no_negative_degil":True,
-        "no_ironic_punctuation":True,
-        "no_negative_beforeComma" : True,
-        "no_positive_beforeComma" : True,
-        "no_ne_ne" : True,
-        "no_end_with_degil": True,
-        "no_conjunctions_word": True,
-        "no_hic_before_pos" : True,
-        "no_hic_before_neg" : True,
+        "go_resolve_tie" : True,
     }
     
     input_data["positive_degil"] = rules.positive_degil_control(processed_text, "polarity_positive.txt")
@@ -270,52 +261,16 @@ def main(file_path):
             "start": 
             {
                 "ironic_punctuation": "Negatif",
-                "no_ironic_punctuation": "ne_ne_control",
-            },
-            "ne_ne_control": 
-            {
                 "ne_ne": "Negatif",
-                "no_ne_ne": "positive_degil_control",
-            },
-            "positive_degil_control": 
-            {
                 "positive_degil": "Negatif",
-                "no_positive_degil": "negative_degil_control",
-            },
-            "negative_degil_control": 
-            {
                 "negative_degil": "Pozitif",
-                "no_negative_degil": "check_negative_beforeComma",
-            },
-            "check_negative_beforeComma": 
-            {
                 "negative_beforeComma": "Negatif",
-                "no_negative_beforeComma": "check_positive_beforeComma",
-            },
-            "check_positive_beforeComma": 
-            {
                 "positive_beforeComma": "Pozitif",
-                "no_positive_beforeComma": "check_end_with_degil",
-            },
-            "check_end_with_degil":
-            {
                 "end_with_degil" : "Negatif",
-                "no_end_with_degil" : "check_conjunctions_word",
-            },
-            "check_conjunctions_word": 
-            {
                 "conjunctions_word": "Negatif",
-                "no_conjunctions_word": "check_hic_before_pos",
-            },
-            "check_hic_before_pos": 
-            {
                 "hic_before_pos": "Negatif",
-                "no_hic_before_pos": "check_hic_before_neg",
-            },
-            "check_hic_before_neg": 
-            {
                 "hic_before_neg": "Pozitif",
-                "no_hic_before_neg": "resolve_tie",
+                "go_resolve_tie": "resolve_tie",
             },
             "resolve_tie": 
             {
