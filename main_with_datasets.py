@@ -304,13 +304,13 @@ def main(file_path):
     print(results_df)
 
     # Sonuçları Excel dosyasına kaydet
-    results_df.to_excel('tahmin_sonuclari.xlsx', index=False, engine='openpyxl')
-    highlight_cells_by_value('tahmin_sonuclari.xlsx')
+    results_df.to_excel('datasets/tahmin_sonuclari.xlsx', index=False, engine='openpyxl')
+    highlight_cells_by_value('datasets/tahmin_sonuclari.xlsx')
     print("Sonuçlar 'tahmin_sonuclari.xlsx' dosyasına kaydedildi.")
 
     # `Result?` değeri `False` olan satırları ayrı bir dosyaya kaydet
     errors_df = results_df[results_df['Result?'] == False]
-    errors_df.to_excel('hatalar.xlsx', index=False, engine='openpyxl')
+    errors_df.to_excel('datasets/hatalar.xlsx', index=False, engine='openpyxl')
     print("Hatalar 'hatalar.xlsx' dosyasına kaydedildi.")
 
 
@@ -322,6 +322,6 @@ def main(file_path):
 
 # Ana fonksiyonu çağır
 if __name__ == '__main__':
-    file_path = 'ornek.xlsx' 
+    file_path = 'datasets/ornek.xlsx' 
     main(file_path)
 

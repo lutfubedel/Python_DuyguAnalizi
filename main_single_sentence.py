@@ -59,17 +59,6 @@ def process_text_with_zeyrek(text, analyzer):
 
     return processed_sentences
 
-def display_processed_text(processed_text):
-    """
-    İşlenmiş metni formatlı şekilde yazdıran fonksiyon.
-    """
-    print("----------------------------------------------------------------------------------------------------------")
-    for i, sentence in enumerate(processed_text):
-        print(f"Cümle {i+1}:")
-        for word_info in sentence:
-            print(f"Kelime: {word_info['Kelime']}, \nKök: {word_info['Kök']}, \nEkler: {word_info['Ekler']}, \nPOS: {word_info['POS']}\n--------------------------------------")
-        print("----------------------------------------------------------------------------------------------------------")
-
 def analyze_sentence(processed_text):
     # Flagleri başlat
     input_data = {
@@ -106,9 +95,6 @@ def analyze_sentence(processed_text):
     input_data["hic_before_pos"] = rules.check_before_hic(processed_text,"polarity_positive.txt")
     input_data["hic_before_neg"] = rules.check_before_hic(processed_text,"polarity_negative.txt")
 
-    print("Positive Polarity : " , "Score : ", positive_score)
-    print("Negative Polarity : " , "Score : ", negative_score)
-
     if(negative_score == 0 and positive_score == 0):
         input_data["conjunctions_word"] = rules.conjunctions_control(processed_text)
 
@@ -131,10 +117,8 @@ def run_fsm(fsm, input_data):
     FSM'i çalıştırır ve bir son duruma ("positive" veya "negative") ulaşana kadar devam eder.
     """
     current_state = "start"
-    print(f"Başlangıç Durumu: {current_state}")
 
     while current_state not in ["Pozitif", "Negatif"]:
-        print(f"Mevcut Durum: {current_state}")
 
         # Mevcut durumdaki geçişleri al
         transitions = fsm.get(current_state, {})
@@ -143,26 +127,19 @@ def run_fsm(fsm, input_data):
         # Geçiş koşullarını kontrol et ve uygun bir sonraki duruma ilerle
         for condition, next_state in transitions.items():
             if condition in input_data and input_data[condition]:
-                print(f"Koşul Sağlandı: {condition} -> Geçiş Yapılıyor: {next_state}")
                 current_state = next_state
                 transition_found = True
                 break
         
         if not transition_found:
-            print(f"Durum '{current_state}' için geçerli bir geçiş bulunamadı.")
             raise ValueError(f"Durum '{current_state}' için geçerli bir geçiş bulunamadı.")
     
-    print(f"Son Durum: {current_state}")
-    print("----------------------------------------------------------------------------------------------------------")
-
     return current_state
 
-def main():
+def polarity_prediction(sentence):
     """
     Main fonksiyonu, dosyayı yükler, analizörleri başlatır, metni işler ve sonucu yazdırır.
     """
-    sentence = "Yemekler enfes olmuş."
-
     # Analizörleri başlat
     analyzer = zeyrek.MorphAnalyzer()
 
@@ -170,7 +147,7 @@ def main():
     processed_text = process_text_with_zeyrek(sentence, analyzer)
 
     # İşlenmiş metni yazdır
-    display_processed_text(processed_text)
+    #display_processed_text(processed_text)
 
     # FSM tanımı
     fsm = {
@@ -202,9 +179,7 @@ def main():
     predicted_class = run_fsm(fsm, input_data)
     
     print(f"FSM Tahmini: {predicted_class}")
+    return predicted_class
 
 
-# Ana fonksiyonu çağır
-if __name__ == '__main__':
-    main()
 
