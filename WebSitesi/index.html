@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duygu Analizi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="https://mdbf.btu.edu.tr/bilgisayar" target="_blank">
+        <img src="logo.png" alt="Okul Logosu" class="logo">
+    </a>
+
+    <div class="container">
+        <h2>Duygu Analizi</h2>
+        <input type="text" id="sentence" placeholder="Bir cümle girin...">
+        <button onclick="analyzeSentiment()">Analiz Et</button>
+        
+        <!-- Yükleniyor Animasyonu -->
+        <div id="loading" class="loading-spinner" style="display: none;"></div>
+
+        <p id="result"></p>
+    </div>
+    <footer>
+        <p>
+            <a href="mailto:22360859041@ogr.btu.edu.tr">
+                <img src="mail.png" alt="E-posta" class="contact-icon">
+            </a>
+            <a href="https://github.com/lutfubedel/Python_DuyguAnalizi" target="_blank">
+                <img src="github.png" alt="GitHub" class="contact-icon">
+            </a>
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
