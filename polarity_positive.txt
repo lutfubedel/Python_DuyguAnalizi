@@ -327,3 +327,5 @@ iade
 beğenmek
 beğeni
 rahatlamak 
+kıymet
+şevkat
