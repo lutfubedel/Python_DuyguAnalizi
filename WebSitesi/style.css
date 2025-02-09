@@ -1,119 +1,286 @@
-footer {
-    margin-top: 50px;
-    text-align: center;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.1);
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-}
-
-footer p {
-    margin: 5px;
-    font-size: 16px;
-}
-
-.contact-icon {
-    width: 40px;
-    height: 40px;
-    margin: 0 10px;
-    transition: transform 0.3s;
-}
-
-.contact-icon:hover {
-    transform: scale(1.2);
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --input-bg: #f5f5f5;
+    --header-bg: #ffffff; /* Header same as background in light mode */
 }
 
 body {
-    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body.dark-mode {
+    --bg-color: rgba(42, 42, 42, 1);
+    --text-color: rgba(255, 255,255, 0.9);
+    --input-bg: rgba(60, 60, 60, 0.9);
+    --header-bg: rgba(32, 32, 32, 0.8); /* Header same as background in dark mode */
+}
+
+/* HEADER */
+header {
+    background-color: var(--header-bg); /* Header changes dynamically */
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: background-color 0.3s;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+}
+
+/* LOGO CONTAINER */
+#logo-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#logo-container a {
+    display: flex;
     justify-content: center;
-    height: 100vh;
-    margin: 0;
-    background: radial-gradient(circle, #6a5acd, #3498db); 
-    background-size: 100% 100%;
-    background-position: center;
-    overflow-x: hidden;
 }
 
-.container {
-    background: rgba(255, 255, 255, 0.85); 
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+#logo-container img {
+    height: 70px; /* Slightly bigger logo */
+    width: auto;
 }
 
-.container:hover {
-    transform: scale(1.05); 
-    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3); 
-}
-
-.logo {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 100px; 
-    height: 100px; 
-    border-radius: 50%; 
-    transition: transform 0.3s ease;
-    object-fit: cover; 
-}
-
-.logo:hover {
-    transform: scale(1.1); 
-}
-
-input[type="text"] {
-    width: 80%;
-    padding: 12px;
-    margin: 15px 0;
-    border: 2px solid #6a5acd; 
-    border-radius: 8px;
-    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
-    transition: border 0.3s ease;
-}
-
-input[type="text"]:focus {
-    border-color: #3498db; 
-}
-
-button {
-    padding: 12px 24px;
-    background-color: #6a5acd;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-button:hover {
-    background-color: #5a4ca0; 
-}
-
-#result {
-    margin-top: 20px;
-    font-weight: bold;
+/* DEPARTMENT TEXT BELOW LOGO */
+#department-text {
     font-size: 18px;
-    color: #3498db;
+    font-weight: bold;
+    color: var(--text-color); /* Matches text color */
+    text-transform: uppercase;
+    margin-top: 5px;
 }
 
-.loading-spinner {
-    border: 6px solid rgba(0, 0, 0, 0.2);
-    border-top: 6px solid #6a5acd;
+/* THEME TOGGLE BUTTON */
+#theme-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
     border-radius: 50%;
+    transition: background-color 0.3s;
+    margin-right: 48px;
+}
+
+#theme-btn:hover {
+    background-color: var(--input-bg);
+}
+
+/* Theme Toggle Icon */
+#theme-icon {
+    width: 28px;
+    height: 28px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* SEARCH AREA */
+.container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin-top: 90px;
+}
+
+.search-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    gap: 10px; /* Adds spacing between elements */
+}
+
+/* Input and Button Wrapper */
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Spacing between input and button */
+    width: 100%;
+}
+
+/* Input Field */
+.search-input {
+    flex: 1;
+    padding: 15px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.search-input:focus {
+    outline: none;
+    box-shadow: 0 0 1px 3px #113E68;
+
+}
+
+/* Styled Analyze Button */
+#analyze-btn {
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #113E68;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+#analyze-btn:hover {
+    background-color: #50B1C8;
+    border-color: #50B1C8;
+    box-shadow: 0 0 0 1px #113E68;
+}
+
+/* Loading Spinner */
+#loading-spinner {
+    display: none; /* Hidden by default */
     width: 40px;
     height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top: 4px solid #113E68; /* Primary color */
+    border-radius: 50%;
     animation: spin 1s linear infinite;
-    margin: 20px auto;
+    margin-top: 10px;
 }
 
+/* Spinner Animation */
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
+/* Result Container */
+#result-container {
+    margin-top: 15px; /* Ensure spacing below button */
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 570px;
+    display: none;
+    color: #ffffff
+}
+
+#result-container.show {
+    display: block; /* Show when result is available */
+}
+
+/* FOOTER */
+footer {
+    padding: 20px;
+    text-align: center;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+.icon img {
+    width: 36px;
+    height: 36px;
+    opacity: 0.6;
+    transition: opacity 0.25s;
+}
+
+.icon:hover img {
+    opacity: 1;
+}
+
+/* Pop-up Background Overlay (Blurs the Background) */
+#popup-overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    backdrop-filter: blur(8px); /* Background blur effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Pop-up Content Box */
+#popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    color: black; /* Ensure text is visible in light mode */
+}
+
+/* Close Button */
+#close-popup {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* 🌙 Dark Mode Adjustments */
+body.dark-mode #popup-content {
+    background: #222; /* Dark background for popup */
+    color: white; /* White text in dark mode */
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2); /* Subtle white shadow */
+}
+
+body.dark-mode #popup-overlay {
+    background-color: rgba(0, 0, 0, 0.6); /* Darker overlay for visibility */
+}
+
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .search-input {
+        font-size: 14px;
+    }
+
+    #logo-container img {
+        height: 60px; /* Slightly smaller logo for mobile */
+    }
+
+    #department-text {
+        font-size: 16px;
+    }
+}

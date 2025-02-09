@@ -3,34 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duygu Analizi</title>
+    <title>Modern UI</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <a href="https://mdbf.btu.edu.tr/bilgisayar" target="_blank">
-        <img src="logo.png" alt="Okul Logosu" class="logo">
-    </a>
+    <header>
+        <div class="header-content">
+            <div id="logo-container">
+                <a href="https://btu.edu.tr/tr" class="tr">
+                    <img src="https://depo.btu.edu.tr/img/sayfa//1691131969_8a51c342027f1a147a8b.png" alt="BTU Logo">
+                </a>
+                <div id="department-text">BİLGİSAYAR MÜHENDİSLİĞİ</div>
+            </div>
+            <button id="theme-btn">
+                <img id="theme-icon" src="https://cdn-icons-png.flaticon.com/512/439/439842.png" alt="Toggle Theme">
+            </button>
+        </div>
+    </header>
 
     <div class="container">
-        <h2>Duygu Analizi</h2>
-        <input type="text" id="sentence" placeholder="Bir cümle girin...">
-        <button onclick="analyzeSentiment()">Analiz Et</button>
-        
-        <!-- Yükleniyor Animasyonu -->
-        <div id="loading" class="loading-spinner" style="display: none;"></div>
-
-        <p id="result"></p>
+        <div class="search-container">
+            <div class="input-wrapper">
+                <input type="text" id="text-input" placeholder="Analiz edilecek cümleyi girin..." class="search-input">
+                <button id="analyze-btn">Analiz Et!</button>
+            </div>
+            <div id="loading-spinner"></div> <!-- Added Spinner -->
+            <div id="result-container"></div>
+        </div>
     </div>
+
     <footer>
-        <p>
-            <a href="mailto:22360859041@ogr.btu.edu.tr">
-                <img src="mail.png" alt="E-posta" class="contact-icon">
+        <div class="social-icons">
+            <a href="#" class="icon" id="contact-btn">
+                <img src="https://cdn-icons-png.flaticon.com/512/9374/9374883.png " alt="Contact">
             </a>
-            <a href="https://github.com/lutfubedel/Python_DuyguAnalizi" target="_blank">
-                <img src="github.png" alt="GitHub" class="contact-icon">
+            <a href="https://github.com/lutfubedel/Python_DuyguAnalizi" class="icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
             </a>
-        </p>
+        </div>
     </footer>
+
+        <!-- Pop-up Modal -->
+    <div id="popup-overlay">
+        <div id="popup-content">
+            <span id="close-popup">&times;</span>
+            <h2>Hakkında</h2>
+            <p>Bu proje, <b>BLM0351 Python Programlama</b> dersi için hazırlanmıştır.</p>
+            <p>Kural tabanlı geliştirilen algoritma ve sonlu durum makinesi ile cümlenin duygu analizi sağlanmaktadır.</p>
+            <p>Detaylar ve rapor için GitHub sayfamızı kontrol edin!</p>
+            <p><i>Enes Şevki DÖNMEZ, Kasım DELİACI, Lütfü BEDEL, Yasin Ekici, Yusuf GÜNEY</i></p>
+            <p><strong>Bize Ulaşın!:</strong> kasimdeliaci067@gmail.com</p>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

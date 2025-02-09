@@ -55,7 +55,7 @@ def negative_score_calculate(processed_text, polarity_file):
 
 
        
-def equal_score(processed_text, polarity_file_neg,polarity_file_pos):
+def equal_score(processed_text, polarity_file_neg, polarity_file_pos):
     # Negatif ve pozitif skorları ve kelimeleri al
     neg_score, neg_words = negative_score_calculate(processed_text, polarity_file_neg)
     pos_score, pos_words = positive_score_calculate(processed_text, polarity_file_pos)
